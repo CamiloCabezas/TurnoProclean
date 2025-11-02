@@ -1,0 +1,33 @@
+
+.Container-navbar{
+    background-color: #3A7CA5;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centra por defecto los hijos */
+    padding: 20px;
+    position: relative; 
+    border-radius: 0 0 5% 5%;
+}
+
+.Title{
+    position: absolute;
+    left: 20px;
+}
+
+.botones-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    gap:30px; 
+}
+
+.botones-navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.botones-navbar a:hover {
+    text-decoration: underline;
+}

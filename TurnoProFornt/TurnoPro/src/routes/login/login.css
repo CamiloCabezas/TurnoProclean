@@ -1,0 +1,29 @@
+/* Fondo general */
+.login-bg {
+  background-color: #121212;
+}
+
+/* Tarjeta del login */
+.login-card {
+  background-color: #1e1e2f;
+  border: none;
+  border-radius: 1rem;
+  width: 22rem;
+}
+
+/* Botón principal */
+.btn-login {
+  background-color: #6f42c1;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #59339d;
+}
+
+/* Inputs */
+.form-control::placeholder {
+  color: #aaa;
+}
