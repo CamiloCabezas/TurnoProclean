@@ -1,6 +1,6 @@
 
 .Container-navbar{
-    background-color: #3A7CA5;
+    background-color: #07434b;
     display: flex;
     align-items: center;
     justify-content: center; /* centra por defecto los hijos */
@@ -30,4 +30,8 @@
 
 .botones-navbar a:hover {
     text-decoration: underline;
+}
+
+h1{
+    color: #1a1717;
 }
