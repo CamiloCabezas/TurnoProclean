@@ -1,5 +1,5 @@
 import './menu.css'
-import { get_empleados_empresa } from '../../endpoints/api'
+import { get_empleados_empresa, get_turnos_asignados } from '../../endpoints/api'
 import { useState, useEffect } from 'react'
 import DateFilter from '../../components/filters/filters'
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,7 +12,7 @@ const Menu = () => {
 
   useEffect(() => {
     const fetchEmpleados = async () => {
-      const data = await get_empleados_empresa("Chayas Peluqueria");
+      const data = await get_turnos_asignados("Chayas Peluqueria");
       if (data) {
         setEmpleados(data);
         console.log("Empleados cargados:", data);
@@ -45,12 +45,13 @@ const Menu = () => {
 
      return (
     <div className="menu">
+      <div className='title'>
+        <h1>Personal de Operaciones</h1>
+      </div>
       <DateFilter />
       <div className="container-menu">
-        <h1 className="title">Personal De Operación</h1>
-
         {dates.map((date, index) => (
-          <div key={index} className="fecha-section">
+          <div key={index} className="turnoFecha">
             <h4>{date.toLocaleDateString("es-CO")}</h4>
             <ul>
               {empleados.map((empleado, i) => (

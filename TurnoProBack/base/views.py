@@ -23,6 +23,49 @@ def get_user_empresa(request, empresa):
     serializer = EmpleadoSerializer(empleados, many=True)
     return Response(serializer.data, status=200)
 
+    
+@api_view(['POST'])
+def get_turnos_asignados(request, empresa):
+    try:
+        empresa_obj = Empresa.objects.get(nombre=empresa)
+        print(empresa)
+    except Empresa.DoesNotExist:
+        return Response({"error": "Empresa no encontrada"}, status=404)
+    
+
+    empleados = Empleado.objects.filter(empresa=empresa_obj)
+
+    if not empleados.exists():
+        return Response({'message': 'No hay empleados para esta empresa'}, status=404)
+    
+
+    fecha = request.data.get('fecha')
+    fecha_inicio = request.data.get('fecha_inicio')
+    fecha_fin = request.data.get('fecha_fin')
+
+    turnos = TurnoAsignado.objects.filter(empleado__in=empleados)
+
+    if fecha:
+        turnos = turnos.filter(fecha=fecha)
+
+    if fecha_inicio and fecha_fin:
+        turnos = turnos.filter(fecha__range=[fecha_inicio, fecha_fin])
+
+    if not turnos.exists():
+        return Response({"message": "No hay turnos asignados para los filtros dados."}, status=404)
+
+    serializer = TurnoAsignadoSerializer(turnos, many=True)
+    return Response(serializer.data, status=200)
+
+
+
+
+
+
+
+    
+
+
 
 
 @api_view(['POST'])

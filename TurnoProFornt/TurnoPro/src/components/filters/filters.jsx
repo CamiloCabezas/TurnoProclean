@@ -13,7 +13,7 @@ const DateFilter = () => {
 
     return (
         <div className="date-filter-container">
-        <h2>Selecciona un día o un rango</h2>
+        <h4>Selecciona el rango de fechas</h4>
             <label>Desde: </label>
             <input 
             type="date"

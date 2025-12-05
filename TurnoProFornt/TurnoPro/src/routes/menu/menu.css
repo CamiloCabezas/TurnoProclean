@@ -11,8 +11,22 @@
 .container-menu{
     background-color: #BDBDBD;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100dvh;
     width: 80%;
-    
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.turnoFecha{
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
 }

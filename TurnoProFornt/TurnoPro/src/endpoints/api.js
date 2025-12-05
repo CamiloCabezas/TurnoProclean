@@ -6,6 +6,7 @@ const LOGIN_URL = `${BASE_URL}token/`
 const MOVIMIENTOS_URL = `${BASE_URL}movimientos/`
 const REFRESH_URL = `${BASE_URL}token/refresh/`
 const USER_EMPRESA = `${BASE_URL}empleados/`
+const TURNOS_EMPRESA = `${BASE_URL}TurnosAsignados/`
 
 export const login = async (username, password) => {
     const response = await axios.post(LOGIN_URL,
@@ -37,6 +38,15 @@ export const get_movimientos = async () => {
 export const get_empleados_empresa = async (empresa) => {
     const response = await axios.get(`${USER_EMPRESA}${encodeURIComponent(empresa)}/`);
 
+    return response.data
+}
+
+export const get_turnos_asignados = async (empresa) => {
+    const body = {
+        fecha_inicio : "2025-11-12",
+        fecha_fin: "2025-11-19"
+    }
+    const response = await axios.post(`${TURNOS_EMPRESA}${encodeURIComponent(empresa)}/`, body)
     return response.data
 }
 
