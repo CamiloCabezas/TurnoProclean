@@ -93,6 +93,14 @@ const Menu = () => {
                           {turno.hora_salida_real ? turno.hora_salida_real : "-.-"}
                         </div>
                       </div>
+                      <div className='botones_turno'>
+                        <button className='turno_boton'>
+                            Turno
+                        </button>
+                        <button className='marcaje_boton'>
+                            Marcaje
+                        </button>
+                      </div>
                     </li>                    
                   
                 ))
