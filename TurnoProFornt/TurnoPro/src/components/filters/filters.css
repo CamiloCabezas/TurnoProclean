@@ -17,3 +17,8 @@
 h4{
   color: white;
 }
+
+label{
+  color: aliceblue;
+  gap: 10px;
+}

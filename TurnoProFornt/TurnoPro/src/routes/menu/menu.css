@@ -9,13 +9,14 @@
 
 
 .container-menu{
-    background-color: #703333;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100dvh;
-    width: 80%;
+    width: 90%;
+    margin: 40px 0 0 0;
 }
 
 .title{
@@ -26,10 +27,58 @@
 }
 
 .turnoFecha{
-    background-color: #69afdb;
+    background-color: #07434b;
+    color:aliceblue;
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
     margin-bottom: 20px;
+}
+
+.empaque{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+.vacio{
+    background-color: #052125;
+        color:aliceblue;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card_turnoAsignado{
+    display: flex;
+    flex-direction: column;
+}
+
+.marcaciones{
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 80px;
+    border: 1px solid grey;
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+
+.marcacion_entrada{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.marcaciones_salida{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

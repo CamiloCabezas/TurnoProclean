@@ -59,16 +59,14 @@ const Menu = () => {
 
     <div className="container-menu">
       {dates.map((date, index) => {
-
-        console.log(date);
+  
         
-        // Filtrar los turnos que coinciden con la fecha
         const turnosDeEseDia = turnosAsignados.filter(
           (turno) => turno.fecha === toYYYYMMDD(date)
         );
 
         return (
-          <div key={index} className="turnoFecha">
+          <div key={index} className={turnosDeEseDia.length > 0 ? "turnoFecha" : "vacio"}>
             <div>
               <h4>{date.toLocaleDateString("es-CO")}</h4>
             </div>
@@ -77,13 +75,29 @@ const Menu = () => {
             <ul>
               {turnosDeEseDia.length > 0 ? (
                 turnosDeEseDia.map((turno, i) => (
-                  <li key={i}>
-                    {turno.empleado} — {turno.tipo_turno.nombre} (
-                    {turno.tipo_turno.hora_inicio} - {turno.tipo_turno.hora_fin})
-                  </li>
+                  
+                    <li key={i} className='empaque'>
+                      <div className='card_turnoAsignado'>
+                        {turno.empleado} — {turno.tipo_turno.nombre} 
+                        <div>
+                          ( {turno.tipo_turno.hora_inicio} - {turno.tipo_turno.hora_fin})
+                        </div>
+                      </div>
+                      <div className='marcaciones'>
+                        <div className='marcacion_entrada'>
+                          <p>Marcacion Entrada</p>
+                          {turno.hora_ingreso_real ? turno.hora_ingreso_real : "-.-"}
+                        </div>
+                        <div className='marcaciones_salida'>
+                          <p>Marcacion Salida</p>
+                          {turno.hora_salida_real ? turno.hora_salida_real : "-.-"}
+                        </div>
+                      </div>
+                    </li>                    
+                  
                 ))
               ) : (
-                <li>No hay turnos asignados</li>
+                <li >No hay turnos asignados</li>
               )}
             </ul>
           </div>
