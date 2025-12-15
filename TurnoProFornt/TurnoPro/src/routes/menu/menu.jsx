@@ -2,6 +2,7 @@ import './menu.css'
 import { get_empleados_empresa, get_turnos_asignados } from '../../endpoints/api'
 import { useState, useEffect } from 'react'
 import DateFilter from '../../components/filters/filters'
+import Card_turnos from '../../components/card_turnos/card_turnos'
 import "react-datepicker/dist/react-datepicker.css";
 
 const Menu = () => {
@@ -57,7 +58,8 @@ const Menu = () => {
 
     <DateFilter />
 
-    <div className="container-menu">
+    <Card_turnos/>
+    {/* <div className="container-menu">
       {dates.map((date, index) => {
   
         
@@ -111,7 +113,7 @@ const Menu = () => {
           </div>
         );
       })}
-    </div>
+    </div> */}
   </div>
 );
 }
