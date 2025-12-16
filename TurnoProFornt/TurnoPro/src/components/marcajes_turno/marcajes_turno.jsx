@@ -1,5 +1,7 @@
+import { use } from "react";
 import "./marcajes_turno.css"
 import { useState } from "react";
+import { post_marcas } from "../../endpoints/api";
 
 export default function MarcajeModal({ turno, cerrar }) {
     const ahora = new Date();
@@ -10,6 +12,38 @@ export default function MarcajeModal({ turno, cerrar }) {
     hour12: false
     });
     const [tipoMarcaje, setTipoMarcaje] = useState(null);
+    const [cargando, setCargando] = useState(null);
+    const [hora, sethora] = useState("")
+
+    const registrarMarcaje = async (e) => {
+        e.preventDefault();
+
+        if (!tipoMarcaje) {
+            alert("Debes seleccionar si la marcación es de Entrada o Salida");
+            return;
+        }
+
+        setCargando(true);
+
+        try {
+            const result_marcas = await post_marcas(
+                turno.id,
+                tipoMarcaje,
+                horaActual
+            );
+
+            alert("Marcaje registrado correctamente ✅");
+            cerrar();
+
+        } catch (error) {
+            console.error(error);
+            alert("Error al registrar el marcaje ❌");
+        } finally {
+            setCargando(false);
+        }
+    };
+
+
     return (
         <div className="modal_overlay">
         <div className="modal_content">
@@ -53,8 +87,8 @@ export default function MarcajeModal({ turno, cerrar }) {
 
 
                 <div className="container_confirmacion">
-                    <form>
-                        <button type="submit" className="boton_registro">Registrar marcaje</button>
+                    <form onSubmit={registrarMarcaje}>
+                        <button type="submit" className="boton_registro">{cargando ? "Registrando...": "Registrar marcaje"}</button>
                     </form>
                 </div>
             </div>

@@ -99,7 +99,9 @@ def asignacion_turnos(request):
     serializer = TurnoAsignadoSerializer(turno_asignado)
     return Response(serializer.data, status=201)
 
-@api_view(['GET'])
+
+
+@api_view(['POST'])
 def maracaje_turno(request):
     print(request.data)
     turno_id = request.data.get("turno_id")

@@ -7,6 +7,7 @@ const MOVIMIENTOS_URL = `${BASE_URL}movimientos/`
 const REFRESH_URL = `${BASE_URL}token/refresh/`
 const USER_EMPRESA = `${BASE_URL}empleados/`
 const TURNOS_EMPRESA = `${BASE_URL}TurnosAsignados/`
+const MARCAJES = `${BASE_URL}maracaje_turno/`
 
 export const login = async (username, password) => {
     const response = await axios.post(LOGIN_URL,
@@ -50,6 +51,16 @@ export const get_turnos_asignados = async (empresa) => {
     return response.data
 }
 
+export const post_marcas = async (turno_id, tipo_marca, hora_marca) => {
+    const body = {
+        turno_id : turno_id,
+        tipo_marca : tipo_marca,
+        hora_marca : hora_marca
+    }
+
+    const response = await axios.post(`${MARCAJES}`, body)
+    return response.data
+}
 
 
 
