@@ -9,7 +9,7 @@ const Card_turnos = () => {
 
     const [turnosAsignados, setturnosAsignados] = useState([])
     const [dates, setDates] = useState([])
-    const [openMarcaciones, setOpenMarcaciones] = useState(false)
+    const [openMarcaciones, setOpenMarcaciones] = useState(false);
     const [turnoSeleccionado, setTurnoSeleccionado] = useState(null);
     const [openTurno, setOpenTurno] = useState(false)
     const abrirMarcaje = (turno) => {
@@ -111,10 +111,10 @@ const Card_turnos = () => {
                     </div>
                     );
                 })}
-                    {MarcajeModal && turnoSeleccionado && (
+                    {openMarcaciones && turnoSeleccionado && (
                     <MarcajeModal
                         turno={turnoSeleccionado}
-                        cerrar={() => setOpenMarcaciones(false)}
+                        cerrar={() => {setOpenMarcaciones(false)}}
                     />
                     )}
                 </div>

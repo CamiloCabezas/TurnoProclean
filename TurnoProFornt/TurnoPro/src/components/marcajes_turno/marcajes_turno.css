@@ -8,9 +8,64 @@
   z-index: 1000;
 }
 
+
 .modal_content {
   background: white;
-  padding: 20px;
   border-radius: 12px;
-  width: 400px;
+  width: 420px;
+  overflow: hidden; 
+}
+
+.header {
+  background-color: #1f6f78;
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal_body {
+  padding: 30px;
+}
+
+.close_btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.close_btn span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 3px;
+  background-color: #ef4444; 
+  border-radius: 2px;
+}
+
+.close_btn span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close_btn span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.container_confirmacion{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boton_registro{
+  background-color: #1f6f78;
+  color: white;
+  padding: 5px 10px;
+  margin: 5px 0 0 0;
+  border-radius: 30px;
 }
