@@ -36,7 +36,7 @@ export default function MarcajeModal({ turno, cerrar }) {
                 type="checkbox"
                 id="Entrada"
                 checked={tipoMarcaje === "entrada"}
-                onChange={() => setTipoMarcaje("entrada")}
+                onChange={() => setTipoMarcaje(tipoMarcaje === "entrada"?null:"entrada")}
                 disabled={tipoMarcaje === "salida"}
                 />
                 <label htmlFor="Entrada">Marcar Entrada</label>
@@ -45,7 +45,7 @@ export default function MarcajeModal({ turno, cerrar }) {
                 type="checkbox"
                 id="Salida"
                 checked={tipoMarcaje === "salida"}
-                onChange={() => setTipoMarcaje("salida")}
+                onChange={() => setTipoMarcaje(tipoMarcaje==="salida"?null:'salida')}
                 disabled={tipoMarcaje === "entrada"}
                 />
                 <label htmlFor="Salida">Marcar Salida</label>

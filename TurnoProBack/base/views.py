@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Usuario, Empleado, Empresa, TipoTurno, TurnoAsignado
 from .serializers import EmpleadoSerializer, TurnoAsignadoSerializer
+from django.utils import timezone
+from datetime import datetime
 
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
@@ -28,7 +30,6 @@ def get_user_empresa(request, empresa):
 def get_turnos_asignados(request, empresa):
     try:
         empresa_obj = Empresa.objects.get(nombre=empresa)
-        print(empresa)
     except Empresa.DoesNotExist:
         return Response({"error": "Empresa no encontrada"}, status=404)
     
@@ -98,6 +99,61 @@ def asignacion_turnos(request):
     serializer = TurnoAsignadoSerializer(turno_asignado)
     return Response(serializer.data, status=201)
 
+@api_view(['GET'])
+def maracaje_turno(request):
+    print(request.data)
+    turno_id = request.data.get("turno_id")
+    tipo_marca = request.data.get("tipo_marca")
+    hora_marca = request.data.get("hora_marca")
+
+    if not turno_id or not tipo_marca:
+        return Response({"Error":"Debes indicar el turno y la marca"}, status=400)
+    
+    if tipo_marca not in ["entrada", 'salida']:
+        return Response({"Error":"El tipo de marcaje debe ser salida o ingres"})
+    
+    try:
+        turno = TurnoAsignado.objects.get(id = turno_id)
+    except TurnoAsignado.DoesNotExist:
+        return Response({"Error":"Turno no Existe"}, status=404)
+    
+
+    if hora_marca :
+        try:
+            hora = datetime.strptime(hora_marca, "%H:%M:%S").time()
+        except ValueError:
+            return Response(
+                {"error": "Formato de hora inválido (HH:MM:SS)"},
+                status=400)
+    else:
+        hora = timezone.localtime().time()
+
+    if tipo_marca == "entrada":
+        if turno.hora_ingreso_real:
+            return Response({"Error":"La entrada ya fue marcada"}, status=400)
+    
+        turno.hora_ingreso_real=hora
+        turno.save()
+
+        return Response({
+            'message':'Entrada registrada correctamente',
+            'hora':str(hora)
+        }, status=200)
+    
+    if tipo_marca == "salida":
+        if not turno.hora_ingreso_real:
+            return Response({"Error":"No puedes marcar la salida sin haber marcado la entrada"}, status=400)
+        
+        if turno.hora_salida_real:
+            return Response({"error" : "La salida ya fue marcada"}, status=400)
+        
+        turno.hora_salida_real = hora
+        turno.save()
+
+        return Response({
+            "message": "Salida registrada correctamente",
+            "hora": str(hora)
+        }, status=200)
 
 
 
