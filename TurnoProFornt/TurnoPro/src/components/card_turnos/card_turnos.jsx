@@ -2,6 +2,7 @@ import { get_empleados_empresa, get_turnos_asignados } from '../../endpoints/api
 import { useState, useEffect } from 'react'
 import './card_turnos.css'
 import MarcajeModal from '../marcajes_turno/marcajes_turno'
+import Asignacion_turno from '../asignacion_turno/asignacion_turno'
 
 
 
@@ -12,6 +13,13 @@ const Card_turnos = () => {
     const [openMarcaciones, setOpenMarcaciones] = useState(false);
     const [turnoSeleccionado, setTurnoSeleccionado] = useState(null);
     const [openTurno, setOpenTurno] = useState(false)
+    const [diaSeleccionado, setDiaSeleccionado] = useState(null);
+
+    const abrirTurnos = (dia) => {
+      setDiaSeleccionado(dia);
+      setOpenTurno(true)
+    }
+
     const abrirMarcaje = (turno) => {
         setTurnoSeleccionado(turno);
         setOpenMarcaciones(true);
@@ -92,7 +100,7 @@ const Card_turnos = () => {
                                     </div>
                                 </div>
                                 <div className='botones_turno'>
-                                    <button className='turno_boton'>
+                                    <button className='turno_boton' onClick={()=> abrirTurnos(date.toLocaleDateString("es-CO"))}>
                                         Turno
                                     </button>
                                     <button className='marcaje_boton' onClick={() => abrirMarcaje(turno)}>
@@ -115,6 +123,14 @@ const Card_turnos = () => {
                     <MarcajeModal
                         turno={turnoSeleccionado}
                         cerrar={() => {setOpenMarcaciones(false)}}
+                    />
+                    )}
+
+                    {openTurno && diaSeleccionado &&(
+                      console.log("ABRIENDO ASIGNACION TURNO"),
+                      <Asignacion_turno
+                        dia={diaSeleccionado}
+                        cerrar={() => {setOpenTurno(false)}}
                     />
                     )}
                 </div>
