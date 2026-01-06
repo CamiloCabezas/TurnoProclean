@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Usuario, Empleado, Empresa, TipoTurno, TurnoAsignado
-from .serializers import EmpleadoSerializer, TurnoAsignadoSerializer
+from .serializers import EmpleadoSerializer, TurnoAsignadoSerializer, TipoTurnoSerializer
 from django.utils import timezone
 from datetime import datetime
 
@@ -158,8 +158,16 @@ def maracaje_turno(request):
         }, status=200)
 
 
+@api_view(["GET"])
+def get_tipoTurnos(request):
+    tipoTurnos = TipoTurno.objects.all()
 
-
+    if not tipoTurnos:
+        return Response({"Error":"No hay turnos creados"})
+    
+    serializer = TipoTurnoSerializer(tipoTurnos, many=True)
+    return Response(serializer.data, status=200)
+    
 
 
 

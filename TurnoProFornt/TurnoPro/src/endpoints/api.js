@@ -8,6 +8,7 @@ const REFRESH_URL = `${BASE_URL}token/refresh/`
 const USER_EMPRESA = `${BASE_URL}empleados/`
 const TURNOS_EMPRESA = `${BASE_URL}TurnosAsignados/`
 const MARCAJES = `${BASE_URL}maracaje_turno/`
+const TIPO_TURNOS = `${BASE_URL}tipoTurnos/`
 
 export const login = async (username, password) => {
     const response = await axios.post(LOGIN_URL,
@@ -62,6 +63,11 @@ export const post_marcas = async (turno_id, tipo_marca, hora_marca) => {
     return response.data
 }
 
+
+export const get_tipo_turnos = async () => {
+    const response = await axios.get(`${TIPO_TURNOS}`)
+    return response.data
+}
 
 
 

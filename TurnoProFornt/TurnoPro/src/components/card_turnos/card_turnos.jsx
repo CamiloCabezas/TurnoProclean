@@ -127,7 +127,6 @@ const Card_turnos = () => {
                     )}
 
                     {openTurno && diaSeleccionado &&(
-                      console.log("ABRIENDO ASIGNACION TURNO"),
                       <Asignacion_turno
                         dia={diaSeleccionado}
                         cerrar={() => {setOpenTurno(false)}}
