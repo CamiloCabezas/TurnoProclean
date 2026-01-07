@@ -80,7 +80,7 @@ def asignacion_turnos(request):
         return Response({"Error":"Faltan Campos requeridos para poder asignar el turno"})
 
     try:
-        tipo_turno = TipoTurno.objects.get(nombre = tipo_turno)
+        tipo_turno = TipoTurno.objects.get(id = tipo_turno)
     except TipoTurno.DoesNotExist:
         return Response({"Error":"El tipo de turno no existe"}, status=404)
     

@@ -9,6 +9,7 @@ const USER_EMPRESA = `${BASE_URL}empleados/`
 const TURNOS_EMPRESA = `${BASE_URL}TurnosAsignados/`
 const MARCAJES = `${BASE_URL}maracaje_turno/`
 const TIPO_TURNOS = `${BASE_URL}tipoTurnos/`
+const ASIGNACION_TURNO = `${BASE_URL}asignarTurnos/`
 
 export const login = async (username, password) => {
     const response = await axios.post(LOGIN_URL,
@@ -60,6 +61,17 @@ export const post_marcas = async (turno_id, tipo_marca, hora_marca) => {
     }
 
     const response = await axios.post(`${MARCAJES}`, body)
+    return response.data
+}
+
+export const post_asignacion_turno = async (empleado_id, tipo_turno, fecha) => {
+    const body = {
+        empleado_id : empleado_id,
+        tipo_turno : tipo_turno,
+        fecha : fecha
+    }
+
+    const response = await axios.post(`${ASIGNACION_TURNO}`, body)
     return response.data
 }
 

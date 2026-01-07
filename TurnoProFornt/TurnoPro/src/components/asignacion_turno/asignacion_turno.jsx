@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./asignacion_turno.css"
-import { get_tipo_turnos, get_empleados_empresa } from "../../endpoints/api";
+import { get_tipo_turnos, get_empleados_empresa, post_asignacion_turno } from "../../endpoints/api";
 
 const Asignacion_turno = ({ dia, cerrar }) => {
   const [tiposTurnos, setTipoTurnos] = useState([])
-  const [turnoSeleccionado, setTurnoSeleccionado] = useState("")
+  const [turnoSeleccionado, setTurnoSeleccionado] = useState([])
   const [empleados, setEmpleados] = useState([])
-  const [empleadoSeleccionado, setempleadoSeleccionado] = useState("")
+  const [empleadoSeleccionado, setempleadoSeleccionado] = useState([])
+  const [cargando, setCargando] =  useState(false)
 
   useEffect(() =>{
     const tipoTurnos = async () => {
@@ -16,19 +17,63 @@ const Asignacion_turno = ({ dia, cerrar }) => {
         setTipoTurnos(dataturnos)
         setEmpleados(dataEmpleados)
         
+        
       }
       else{
-        console.log("No hay turnos creados");
+        alert("No hemos encontrado ni Colaboradores ni turnos")
         
       }
     }
     tipoTurnos()
   }, [])
 
+  const formatearFechaParaBackend = (fecha) => {
+  const [day, month, year] = fecha.split("/")
+  return `${year}-${month}-${day}`
+}
+
+
+  const AsignarTurno = async (e) => {
+    e.preventDefault()
+
+    if (turnoSeleccionado === "" || empleadoSeleccionado === ""){
+      alert("Debes seleccionar un turno y un colaborador")
+    }
+
+ 
+
+    setCargando(true)
+
+    try {
+      const fechaBackend = formatearFechaParaBackend(dia)
+
+      const asignacion = await post_asignacion_turno(
+        empleadoSeleccionado,
+        turnoSeleccionado,
+        fechaBackend // ✅ formato correcto
+      )
+
+      alert("Se Asigno Correctamente ✅")
+      cerrar()
+    } catch (error) {
+      alert("No se pudo asginar el turno ❌")
+    } finally {
+      setCargando(false)
+    }
+
+
+
+
+  }
+
   return (
     <div className="modal_overlay">
       <div className="modal_content">
         <h3>Asignación turno</h3>
+        <button className="close_btn" onClick={cerrar} aria-label="Cerrar">
+          <span></span>
+          <span></span>
+        </button>
         <p>Día: {dia}</p>
         <label>Tipo de Turno</label>
 
@@ -58,8 +103,13 @@ const Asignacion_turno = ({ dia, cerrar }) => {
               </option>
             ))}
           </select>
-
-        <button onClick={cerrar}>Cerrar</button>
+          <div>
+            <form onSubmit={AsignarTurno}>
+              <button type="submit">
+                {cargando ? "Asignando...":"Asignar Turno"}
+              </button>
+            </form>
+          </div>
       </div>
     </div>
   );

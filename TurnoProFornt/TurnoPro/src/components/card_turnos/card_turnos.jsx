@@ -113,7 +113,18 @@ const Card_turnos = () => {
                             
                             ))
                         ) : (
-                            <li >No hay turnos asignados</li>
+                            <li >No hay turnos asignados
+                                                              <div className='botones_turno'>
+                                    <button className='turno_boton' onClick={()=> abrirTurnos(date.toLocaleDateString("es-CO"))}>
+                                        Turno
+                                    </button>
+                                    <button className='marcaje_boton' onClick={() => abrirMarcaje(turno)}>
+                                        Marcaje
+                                    </button>
+                                    
+
+                                </div>
+                            </li>
                         )}
                         </ul>
                     </div>
