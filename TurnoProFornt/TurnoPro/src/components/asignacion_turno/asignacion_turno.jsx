@@ -69,43 +69,52 @@ const Asignacion_turno = ({ dia, cerrar }) => {
   return (
     <div className="modal_overlay">
       <div className="modal_content">
-        <h3>Asignación turno</h3>
-        <button className="close_btn" onClick={cerrar} aria-label="Cerrar">
-          <span></span>
-          <span></span>
-        </button>
-        <p>Día: {dia}</p>
-        <label>Tipo de Turno</label>
+        <div className="header">
+          <h3>Asignación turno</h3>
+          <button className="close_btn" onClick={cerrar} aria-label="Cerrar">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
 
+        <div className="modal_body">
+          <h4>Dia de Asignacion: {dia}</h4>
+
+         <div className="form_group">
+          <label>Tipo de Turno</label>
           <select
             value={turnoSeleccionado}
             onChange={(e) => setTurnoSeleccionado(e.target.value)}
           >
             <option value="">-- Selecciona un turno --</option>
-
             {tiposTurnos.map((turno) => (
               <option key={turno.id} value={turno.id}>
                 {turno.nombre} ({turno.hora_inicio} - {turno.hora_fin})
               </option>
             ))}
           </select>
-        <label>Colaborador</label>
+        </div>
 
+        <div className="form_group">
+          <label>Colaborador</label>
           <select
             value={empleadoSeleccionado}
             onChange={(e) => setempleadoSeleccionado(e.target.value)}
           >
             <option value="">-- Selecciona un Colaborador --</option>
-
             {empleados.map((emple) => (
               <option key={emple.id} value={emple.id}>
-                {emple.nombre} 
+                {emple.nombre}
               </option>
             ))}
           </select>
-          <div>
+        </div>
+
+        </div>
+          
+          <div className="container_confirmacion">
             <form onSubmit={AsignarTurno}>
-              <button type="submit">
+              <button type="submit" className="boton_registro">
                 {cargando ? "Asignando...":"Asignar Turno"}
               </button>
             </form>

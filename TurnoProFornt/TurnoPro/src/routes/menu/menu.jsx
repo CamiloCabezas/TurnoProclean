@@ -57,7 +57,6 @@ const Menu = () => {
     </div>
 
     <DateFilter />
-
     <Card_turnos/>
 
   </div>

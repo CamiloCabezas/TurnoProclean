@@ -15,3 +15,50 @@
   width: 420px;
   overflow: hidden; 
 }
+
+
+h4{
+  color: black;
+}
+.form_group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+/* LABEL */
+.form_group label {
+  color: aliceblue;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* SELECT */
+.form_group select {
+  width: 100%;
+  padding: 10px 12px;
+
+  border-radius: 6px;
+  border: 1px solid #1f6f78;
+
+  background-color: white;
+  color: #052125;
+
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+/* FOCUS */
+.form_group select:focus {
+  border-color: #2e8b57;
+  box-shadow: 0 0 0 2px rgba(46, 139, 87, 0.2);
+}
+
+/* OPCIONES */
+.form_group option {
+  color: #052125;
+}
