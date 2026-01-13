@@ -6,25 +6,41 @@ from .models import Usuario, Empleado, Empresa, TipoTurno, TurnoAsignado
 from .serializers import EmpleadoSerializer, TurnoAsignadoSerializer, TipoTurnoSerializer
 from django.utils import timezone
 from datetime import datetime
+from django.shortcuts import get_object_or_404
 
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
-def get_user_empresa(request, empresa):
-    try:
-        empresa_obj = Empresa.objects.get(nombre=empresa)
-        print(empresa)
-    except Empresa.DoesNotExist:
-        return Response({"error": "Empresa no encontrada"}, status=404)
+def get_user_empresa(request, empresa_id):
+    # try:
+    #     empresa_obj = Empresa.objects.get(nombre=empresa)
+    #     print(empresa)
+    # except Empresa.DoesNotExist:
+    #     return Response({"error": "Empresa no encontrada"}, status=404)
     
 
+    # empleados = Empleado.objects.filter(empresa=empresa_obj)
+
+    # if not empleados.exists():
+    #     return Response({'message': 'No hay empleados para esta empresa'}, status=404)
+    
+    # serializer = EmpleadoSerializer(empleados, many=True)
+    # return Response(serializer.data, status=200)
+        # 1. Obtener la empresa por ID
+    empresa_obj = get_object_or_404(Empresa, id=empresa_id)
+
+    # 2. Obtener empleados asociados
     empleados = Empleado.objects.filter(empresa=empresa_obj)
 
+    # 3. Validación si no hay empleados
     if not empleados.exists():
-        return Response({'message': 'No hay empleados para esta empresa'}, status=404)
-    
+        return Response(
+            {"message": "No hay empleados para esta empresa"},
+            status=404
+        )
+
+    # 4. Serializar y responder
     serializer = EmpleadoSerializer(empleados, many=True)
     return Response(serializer.data, status=200)
-
     
 @api_view(['POST'])
 def get_turnos_asignados(request, empresa):

@@ -31,11 +31,7 @@ SECRET_KEY = 'django-insecure-6)lfkx(t=)+kc5%k17*yi$rg!f!lyk#x1xn=vg+p!83^!7u^@8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG") == "True"
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "turnopro.onrender.com", 
-]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
