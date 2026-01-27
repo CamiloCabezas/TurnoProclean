@@ -2,26 +2,29 @@
     import DatePicker from "react-datepicker";
     import "./filters.css"; 
     import "react-datepicker/dist/react-datepicker.css";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setStartDate, setEndDate} from '../../features/filtros/filtrosSlice'
 const DateFilter = () => {
-    
-    const [dateInicio, setDateInicio] = useState("");
-    console.log(dateInicio);
-    const [dateFin, setDateFin] = useState("");
-    console.log(dateFin);
+  const dispatch = useDispatch();
+  const { startDate,  } = useSelector(state => state.filtros); 
+
     
 
     return (
         <div className="date-filter-container">
         <h4>Selecciona el rango de fechas</h4>
+        
             <label>Desde: </label>
+
             <input 
             type="date"
-            onChange={(e) => setDateInicio(e.target.value)}/>
+            onChange={(e) => dispatch(setStartDate(e.target.value))}/>
+
             <label>Hasta: </label>
+
             <input 
             type="date"
-            onChange={(e) => setDateFin(e.target.value)}/>
+            onChange={(e) => dispatch(setEndDate(e.target.value))}/>
 
 
         </div>
