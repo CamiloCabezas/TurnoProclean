@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setStartDate, setEndDate} from '../../features/filtros/filtrosSlice'
 const DateFilter = () => {
   const dispatch = useDispatch();
-  const { startDate,  } = useSelector(state => state.filtros); 
+  const { startDate, endDate } = useSelector(state => state.filtros); 
 
     
 
