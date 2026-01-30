@@ -6,19 +6,22 @@ import Asignacion_turno from '../asignacion_turno/asignacion_turno'
 
 
 
-const Card_turnos = () => {
+const Card_turnos = (dates) => {
 
     const [turnosAsignados, setturnosAsignados] = useState([])
-    const [dates, setDates] = useState([])
     const [openMarcaciones, setOpenMarcaciones] = useState(false);
     const [turnoSeleccionado, setTurnoSeleccionado] = useState(null);
     const [openTurno, setOpenTurno] = useState(false)
     const [diaSeleccionado, setDiaSeleccionado] = useState(null);
+    const fechas = dates.Date
 
     const abrirTurnos = (dia) => {
       setDiaSeleccionado(dia);
       setOpenTurno(true)
     }
+
+    console.log(dates.dates)
+    
 
     const abrirMarcaje = (turno) => {
         setTurnoSeleccionado(turno);
@@ -46,25 +49,10 @@ const Card_turnos = () => {
       return `${year}-${month}-${day}`;
     }
     
-    
-      // Esto estara mal pero es para pruebas -----------------
-    useEffect(() => {
-        const start = new Date("2025-11-13");
-        const end = new Date("2025-11-20");
-        const listDates = [];
-        let current = new Date(start)
-        while(current <= end){
-          listDates.push(new Date(current));
-          current.setDate(current.getDate() + 1);
-        }
-        setDates(listDates)
-        console.log(listDates);
-        
-      },[])
-    // --------------------------------------------------------
+
     return(
             <div className="container-menu">
-                {dates.map((date, index) => {
+                {dates.dates.length > 0 ? dates.dates.map((date, index) => {
             
                     
                     const turnosDeEseDia = turnosAsignados.filter(
@@ -129,7 +117,7 @@ const Card_turnos = () => {
                         </ul>
                     </div>
                     );
-                })}
+                }): <h2>No hay nada</h2>}
                     {openMarcaciones && turnoSeleccionado && (
                     <MarcajeModal
                         turno={turnoSeleccionado}

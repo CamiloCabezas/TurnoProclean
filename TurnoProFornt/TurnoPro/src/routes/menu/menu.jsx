@@ -4,26 +4,17 @@ import { useState, useEffect } from 'react'
 import DateFilter from '../../components/filters/filters'
 import Card_turnos from '../../components/card_turnos/card_turnos'
 import "react-datepicker/dist/react-datepicker.css";
+import { useSelector } from 'react-redux'
 
 const Menu = () => {
-    const [turnosAsignados, setturnosAsignados] = useState([])
-    // Prueba
+
+  const {startDate,endDate} = useSelector(state => state.filtros)
+
+
     const [dates, setDates] = useState([])
     // 
 
-  useEffect(() => {
-    const fetchEmpleados = async () => {
-      const data = await get_turnos_asignados("Chayas Peluqueria");
-      if (data) {
-        setturnosAsignados(data);
-        console.log("Empleados cargados:", data);
-      } else {
-        console.log("No se pudieron cargar los empleados.");
-      }
-    };
 
-    fetchEmpleados();
-  }, []);
 
   function toYYYYMMDD(date) {
   const year = date.getFullYear();
@@ -35,8 +26,8 @@ const Menu = () => {
 
   // Esto estara mal pero es para pruebas -----------------
   useEffect(() => {
-    const start = new Date("2025-11-13");
-    const end = new Date("2025-11-20");
+    const start = new Date(startDate);
+    const end = new Date(endDate);
     const listDates = [];
     let current = new Date(start)
     while(current <= end){
@@ -46,7 +37,7 @@ const Menu = () => {
     setDates(listDates)
     console.log(listDates);
     
-  },[])
+  },[startDate,endDate])
 // --------------------------------------------------------
 
 
@@ -57,7 +48,7 @@ const Menu = () => {
     </div>
 
     <DateFilter />
-    <Card_turnos/>
+    <Card_turnos dates={dates}/>
 
   </div>
 );

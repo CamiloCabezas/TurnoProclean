@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const today = new Date().toISOString().split('T')[0]
+
 const initialState = {
-  startDate: null,
-  endDate: null
+  startDate: today,
+  endDate: today
 }
 
 const filtrosSlice = createSlice({
@@ -16,11 +18,12 @@ const filtrosSlice = createSlice({
       state.endDate = action.payload
     },
     resetFechas: (state) => {
-      state.startDate = null
-      state.endDate = null
+      state.startDate = today
+      state.endDate = today
     }
   }
 })
 
 export const { setStartDate, setEndDate, resetFechas } = filtrosSlice.actions
 export default filtrosSlice.reducer
+
