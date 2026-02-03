@@ -30,12 +30,14 @@ const Menu = () => {
     const end = new Date(endDate);
     const listDates = [];
     let current = new Date(start)
-    while(current <= end){
-      listDates.push(new Date(current));
+    while (current <= end) {
+      const formattedDate = current.toISOString().split('T')[0];
+      listDates.push(formattedDate);
       current.setDate(current.getDate() + 1);
     }
+    
+
     setDates(listDates)
-    console.log(listDates);
     
   },[startDate,endDate])
 // --------------------------------------------------------

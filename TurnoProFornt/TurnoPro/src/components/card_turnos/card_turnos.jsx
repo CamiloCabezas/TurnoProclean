@@ -13,14 +13,12 @@ const Card_turnos = (dates) => {
     const [turnoSeleccionado, setTurnoSeleccionado] = useState(null);
     const [openTurno, setOpenTurno] = useState(false)
     const [diaSeleccionado, setDiaSeleccionado] = useState(null);
-    const fechas = dates.Date
-
+    
     const abrirTurnos = (dia) => {
       setDiaSeleccionado(dia);
       setOpenTurno(true)
     }
 
-    console.log(dates.dates)
     
 
     const abrirMarcaje = (turno) => {
@@ -30,12 +28,12 @@ const Card_turnos = (dates) => {
     
     useEffect(() => {
         const fetchEmpleados = async () => {
-          const data = await get_turnos_asignados("Chayas Peluqueria");
+          const data = await get_turnos_asignados(1, dates.dates);
           if (data) {
+            console.log("data");
             setturnosAsignados(data);
-            console.log("Empleados cargados:", data);
           } else {
-            console.log("No se pudieron cargar los empleados.");
+            alert("No se pudieron cargar los empleados.");
           }
         };
     
@@ -49,20 +47,20 @@ const Card_turnos = (dates) => {
       return `${year}-${month}-${day}`;
     }
     
-
+    
+    
     return(
             <div className="container-menu">
                 {dates.dates.length > 0 ? dates.dates.map((date, index) => {
             
                     
                     const turnosDeEseDia = turnosAsignados.filter(
-                    (turno) => turno.fecha === toYYYYMMDD(date)
+                    (turno) => turno.fecha === date
                     );
-
                     return (
                     <div key={index} className={turnosDeEseDia.length > 0 ? "turnoFecha" : "vacio"}>
                         <div>
-                        <h4>{date.toLocaleDateString("es-CO")}</h4>
+                        <h4>{date}</h4>
                         </div>
                         
 

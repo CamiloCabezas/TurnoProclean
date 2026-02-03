@@ -50,7 +50,7 @@ const Asignacion_turno = ({ dia, cerrar }) => {
       const asignacion = await post_asignacion_turno(
         empleadoSeleccionado,
         turnoSeleccionado,
-        fechaBackend // ✅ formato correcto
+        fechaBackend 
       )
 
       alert("Se Asigno Correctamente ✅")
@@ -58,6 +58,7 @@ const Asignacion_turno = ({ dia, cerrar }) => {
     } catch (error) {
       alert("No se pudo asginar el turno ❌")
     } finally {
+      
       setCargando(false)
     }
 

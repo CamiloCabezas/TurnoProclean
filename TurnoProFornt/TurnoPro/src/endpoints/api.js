@@ -44,10 +44,10 @@ export const get_empleados_empresa = async (empresa) => {
     return response.data
 }
 
-export const get_turnos_asignados = async (empresa) => {
+export const get_turnos_asignados = async (empresa, listaFechas) => {
     const body = {
-        fecha_inicio : "2025-11-12",
-        fecha_fin: "2025-11-19"
+        fecha_inicio: listaFechas.length > 0 ? listaFechas[0] : null,
+        fecha_fin: listaFechas.length > 0 ? listaFechas[listaFechas.length - 1] : null
     }
     const response = await axios.post(`${TURNOS_EMPRESA}${encodeURIComponent(empresa)}/`, body)
     return response.data

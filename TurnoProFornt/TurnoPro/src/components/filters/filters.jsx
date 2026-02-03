@@ -1,34 +1,46 @@
-    import React, { useState } from "react";
-    import DatePicker from "react-datepicker";
-    import "./filters.css"; 
-    import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch, useSelector } from 'react-redux';
-import { setStartDate, setEndDate} from '../../features/filtros/filtrosSlice'
+import React, { useState } from "react";
+import "./filters.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setStartDate, setEndDate } from "../../features/filtros/filtrosSlice";
+
 const DateFilter = () => {
   const dispatch = useDispatch();
-  const { startDate, endDate } = useSelector(state => state.filtros); 
+  const { startDate, endDate } = useSelector(state => state.filtros);
 
-    
+  // 🔹 Estado local (lo que el usuario escribe)
+  const [localStartDate, setLocalStartDate] = useState(startDate || "");
+  const [localEndDate, setLocalEndDate] = useState(endDate || "");
 
-    return (
-        <div className="date-filter-container">
-        <h4>Selecciona el rango de fechas</h4>
+  const aplicarFiltros = () => {
         
-            <label>Desde: </label>
 
-            <input 
-            type="date"
-            onChange={(e) => dispatch(setStartDate(e.target.value))}/>
+    dispatch(setStartDate(localStartDate));
+    dispatch(setEndDate(localEndDate));
+  };
 
-            <label>Hasta: </label>
+  return (
+    <div className="date-filter-container">
+      <h4>Selecciona el rango de fechas</h4>
 
-            <input 
-            type="date"
-            onChange={(e) => dispatch(setEndDate(e.target.value))}/>
+      <label>Desde:</label>
+      <input
+        type="date"
+        value={localStartDate}
+        onChange={(e) => setLocalStartDate(e.target.value)}
+      />
 
+      <label>Hasta:</label>
+      <input
+        type="date"
+        value={localEndDate}
+        onChange={(e) => setLocalEndDate(e.target.value)}
+      />
 
-        </div>
-    );
-    };
+      <button onClick={aplicarFiltros}>
+        Aplicar filtros
+      </button>
+    </div>
+  );
+};
 
-    export default DateFilter;
+export default DateFilter;
