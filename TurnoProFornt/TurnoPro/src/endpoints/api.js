@@ -65,6 +65,7 @@ export const post_marcas = async (turno_id, tipo_marca, hora_marca) => {
 }
 
 export const post_asignacion_turno = async (empleado_id, tipo_turno, fecha) => {
+    
     const body = {
         empleado_id : empleado_id,
         tipo_turno : tipo_turno,

@@ -15,6 +15,8 @@ const Card_turnos = (dates) => {
     const [diaSeleccionado, setDiaSeleccionado] = useState(null);
     
     const abrirTurnos = (dia) => {
+        console.log(dia);
+        
       setDiaSeleccionado(dia);
       setOpenTurno(true)
     }
@@ -39,13 +41,7 @@ const Card_turnos = (dates) => {
     
         fetchEmpleados();
       }, []);
-    
-    function toYYYYMMDD(date) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
-    }
+
     
     
     
@@ -86,7 +82,7 @@ const Card_turnos = (dates) => {
                                     </div>
                                 </div>
                                 <div className='botones_turno'>
-                                    <button className='turno_boton' onClick={()=> abrirTurnos(date.toLocaleDateString("es-CO"))}>
+                                    <button className='turno_boton' onClick={()=> abrirTurnos(date)}>
                                         Turno
                                     </button>
                                     <button className='marcaje_boton' onClick={() => abrirMarcaje(turno)}>
@@ -101,7 +97,7 @@ const Card_turnos = (dates) => {
                         ) : (
                             <li >No hay turnos asignados
                                                               <div className='botones_turno'>
-                                    <button className='turno_boton' onClick={()=> abrirTurnos(date.toLocaleDateString("es-CO"))}>
+                                    <button className='turno_boton' onClick={()=> abrirTurnos(date)}>
                                         Turno
                                     </button>
                                     <button className='marcaje_boton' onClick={() => abrirMarcaje(turno)}>

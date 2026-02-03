@@ -27,10 +27,7 @@ const Asignacion_turno = ({ dia, cerrar }) => {
     tipoTurnos()
   }, [])
 
-  const formatearFechaParaBackend = (fecha) => {
-  const [day, month, year] = fecha.split("/")
-  return `${year}-${month}-${day}`
-}
+  const formatearFechaParaBackend = dia
 
 
   const AsignarTurno = async (e) => {
@@ -40,14 +37,17 @@ const Asignacion_turno = ({ dia, cerrar }) => {
       alert("Debes seleccionar un turno y un colaborador")
     }
 
- 
+    
 
     setCargando(true)
 
     try {
-      const fechaBackend = formatearFechaParaBackend(dia)
-
+      const fechaBackend = formatearFechaParaBackend
+        console.log(empleadoSeleccionado)
+        console.log(turnoSeleccionado)
+        console.log(fechaBackend)
       const asignacion = await post_asignacion_turno(
+
         empleadoSeleccionado,
         turnoSeleccionado,
         fechaBackend 
@@ -56,6 +56,8 @@ const Asignacion_turno = ({ dia, cerrar }) => {
       alert("Se Asigno Correctamente ✅")
       cerrar()
     } catch (error) {
+      console.log(error);
+      
       alert("No se pudo asginar el turno ❌")
     } finally {
       
