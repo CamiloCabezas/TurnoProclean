@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./asignacion_turno.css"
 import { get_tipo_turnos, get_empleados_empresa, post_asignacion_turno } from "../../endpoints/api";
 
-const Asignacion_turno = ({ dia, cerrar }) => {
+const Asignacion_turno = ({ dia, cerrar, actualizarDatos }) => {
   const [tiposTurnos, setTipoTurnos] = useState([])
   const [turnoSeleccionado, setTurnoSeleccionado] = useState([])
   const [empleados, setEmpleados] = useState([])
@@ -43,9 +43,6 @@ const Asignacion_turno = ({ dia, cerrar }) => {
 
     try {
       const fechaBackend = formatearFechaParaBackend
-        console.log(empleadoSeleccionado)
-        console.log(turnoSeleccionado)
-        console.log(fechaBackend)
       const asignacion = await post_asignacion_turno(
 
         empleadoSeleccionado,
@@ -54,6 +51,7 @@ const Asignacion_turno = ({ dia, cerrar }) => {
       )
 
       alert("Se Asigno Correctamente ✅")
+      await actualizarDatos()
       cerrar()
     } catch (error) {
       console.log(error);

@@ -3,7 +3,7 @@ import "./marcajes_turno.css"
 import { useState } from "react";
 import { post_marcas } from "../../endpoints/api";
 
-export default function MarcajeModal({ turno, cerrar }) {
+export default function MarcajeModal({ turno, cerrar,actualizarDatos }) {
     const ahora = new Date();
     const horaActual = ahora.toLocaleTimeString("es-CO", {
     hour: "2-digit",
@@ -33,6 +33,7 @@ export default function MarcajeModal({ turno, cerrar }) {
             );
 
             alert("Marcaje registrado correctamente ✅");
+            await actualizarDatos()
             cerrar();
 
         } catch (error) {

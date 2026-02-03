@@ -43,7 +43,15 @@ const Card_turnos = (dates) => {
       }, []);
 
     
-    
+    const fetchEmpleados = async () => {
+          const data = await get_turnos_asignados(1, dates.dates);
+          if (data) {
+            console.log("data");
+            setturnosAsignados(data);
+          } else {
+            alert("No se pudieron cargar los empleados.");
+          }
+        };
     
     return(
             <div className="container-menu">
@@ -116,6 +124,7 @@ const Card_turnos = (dates) => {
                     <MarcajeModal
                         turno={turnoSeleccionado}
                         cerrar={() => {setOpenMarcaciones(false)}}
+                        actualizarDatos = {fetchEmpleados}
                     />
                     )}
 
@@ -123,6 +132,7 @@ const Card_turnos = (dates) => {
                       <Asignacion_turno
                         dia={diaSeleccionado}
                         cerrar={() => {setOpenTurno(false)}}
+                        actualizarDatos = {fetchEmpleados}
                     />
                     )}
                 </div>
