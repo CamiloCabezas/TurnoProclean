@@ -72,31 +72,47 @@ def get_turnos_asignados(request, empresa):
 # @permission_classes([IsAuthenticated])
 def asignacion_turnos(request):
     empleado_id = request.data.get("empleado_id")
-    tipo_turno = request.data.get("tipo_turno")
+    tipo_turno_id = request.data.get("tipo_turno")
     fecha = request.data.get("fecha")
 
-    if not empleado_id or not tipo_turno or not fecha:
-        return Response({"Error":"Faltan Campos requeridos para poder asignar el turno"})
+    if not empleado_id or not tipo_turno_id or not fecha:
+        return Response(
+            {"error": "Faltan campos requeridos"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     try:
-        tipo_turno = TipoTurno.objects.get(id = tipo_turno)
-    except TipoTurno.DoesNotExist:
-        return Response({"Error":"El tipo de turno no existe"}, status=404)
-    
-    try:
+        tipo_turno = TipoTurno.objects.get(id=tipo_turno_id)
         empleado = Empleado.objects.get(id=empleado_id)
-    except Empleado.DoesNotExist:
-        return Response({"Error":"El Usuario al que le quieres asignar el turno no existe"})
-    
-    turno_asignado = TurnoAsignado.objects.create(
-        empleado = empleado,
-        tipo_turno = tipo_turno,
-        fecha = fecha
+    except (TipoTurno.DoesNotExist, Empleado.DoesNotExist):
+        return Response(
+            {"error": "Empleado o tipo de turno no existe"},
+            status=status.HTTP_404_NOT_FOUND
+        )
 
+    # 🔴 VALIDACIÓN CLAVE
+    existe = TurnoAsignado.objects.filter(
+        empleado=empleado,
+        tipo_turno=tipo_turno,
+        fecha=fecha
+    ).exists()
+
+    if existe:
+        return Response(
+            {
+                "error": "Este empleado ya tiene asignado este turno en esta fecha"
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    turno_asignado = TurnoAsignado.objects.create(
+        empleado=empleado,
+        tipo_turno=tipo_turno,
+        fecha=fecha
     )
 
     serializer = TurnoAsignadoSerializer(turno_asignado)
-    return Response(serializer.data, status=201)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 
