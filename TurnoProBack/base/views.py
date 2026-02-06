@@ -69,7 +69,6 @@ def get_turnos_asignados(request, empresa):
 
 
 @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
 def asignacion_turnos(request):
     empleado_id = request.data.get("empleado_id")
     tipo_turno_id = request.data.get("tipo_turno")
@@ -90,7 +89,6 @@ def asignacion_turnos(request):
             status=status.HTTP_404_NOT_FOUND
         )
 
-    # 🔴 VALIDACIÓN CLAVE
     existe = TurnoAsignado.objects.filter(
         empleado=empleado,
         tipo_turno=tipo_turno,

@@ -1,26 +1,36 @@
-/* Fondo general */
+
 .login-bg {
-  background-color: #121212;
+  background-color: #83d3d3;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Tarjeta del login */
 .login-card {
-  background-color: #1e1e2f;
+  background-color: #07434b;
   border: none;
   border-radius: 1rem;
-  width: 22rem;
+  width: 30rem;
+  padding: 30px;
+  transform: translateY(-90px);
 }
 
-/* Botón principal */
 .btn-login {
-  background-color: #6f42c1;
+  background-color: #2e8b57;
   color: #fff;
   border: none;
   transition: all 0.3s ease;
+  width: 100%;
+  border-radius: 3px;
 }
 
 .btn-login:hover {
-  background-color: #59339d;
+  background-color: #1b5232;
+  border: solid 1px;
+  
 }
 
 /* Inputs */
