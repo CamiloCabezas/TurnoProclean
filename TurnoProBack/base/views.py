@@ -8,7 +8,7 @@ from django.utils import timezone
 from datetime import datetime
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def get_user_empresa(request, empresa):
     try:
         empresa_obj = Empresa.objects.get(nombre=empresa)
@@ -69,6 +69,7 @@ def get_turnos_asignados(request, empresa):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def asignacion_turnos(request):
     empleado_id = request.data.get("empleado_id")
     tipo_turno_id = request.data.get("tipo_turno")
@@ -115,7 +116,9 @@ def asignacion_turnos(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def maracaje_turno(request):
+
     print(request.data)
     turno_id = request.data.get("turno_id")
     tipo_marca = request.data.get("tipo_marca")
@@ -172,6 +175,7 @@ def maracaje_turno(request):
 
 
 @api_view(["GET"])
+@permission_classes([IsAuthenticated]) 
 def get_tipoTurnos(request):
     tipoTurnos = TipoTurno.objects.all()
 

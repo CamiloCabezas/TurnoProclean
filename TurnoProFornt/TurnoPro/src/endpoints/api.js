@@ -1,5 +1,5 @@
 
-import axios from "axios"
+import api from "../api/axios";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 const LOGIN_URL = `${BASE_URL}token/`
@@ -11,12 +11,10 @@ const MARCAJES = `${BASE_URL}maracaje_turno/`
 const TIPO_TURNOS = `${BASE_URL}tipoTurnos/`
 const ASIGNACION_TURNO = `${BASE_URL}asignarTurnos/`
 
-export const login = async (username, password) => {
-    const response = await axios.post(LOGIN_URL,
-        {username:username, password:password},
-        {withCredentials:true}
+export const login = async (credentials) => {
+    const response = await api.post(LOGIN_URL,credentials
     )
-    console.log(response.data)
+    
     return response.data
 }
 
@@ -30,7 +28,7 @@ export const login = async (username, password) => {
 
 
 export const get_movimientos = async () => {
-    const response = await axios.get(MOVIMIENTOS_URL,
+    const response = await api.get(MOVIMIENTOS_URL,
         {withCredentials: true}
     )
     
@@ -39,7 +37,7 @@ export const get_movimientos = async () => {
 
 
 export const get_empleados_empresa = async (empresa) => {
-    const response = await axios.get(`${USER_EMPRESA}${encodeURIComponent(empresa)}/`);
+    const response = await api.get(`${USER_EMPRESA}${encodeURIComponent(empresa)}/`);
 
     return response.data
 }
@@ -49,7 +47,7 @@ export const get_turnos_asignados = async (empresa, listaFechas) => {
         fecha_inicio: listaFechas.length > 0 ? listaFechas[0] : null,
         fecha_fin: listaFechas.length > 0 ? listaFechas[listaFechas.length - 1] : null
     }
-    const response = await axios.post(`${TURNOS_EMPRESA}${encodeURIComponent(empresa)}/`, body)
+    const response = await api.post(`${TURNOS_EMPRESA}${encodeURIComponent(empresa)}/`, body)
     return response.data
 }
 
@@ -60,7 +58,7 @@ export const post_marcas = async (turno_id, tipo_marca, hora_marca) => {
         hora_marca : hora_marca
     }
 
-    const response = await axios.post(`${MARCAJES}`, body)
+    const response = await api.post(`${MARCAJES}`, body)
     return response.data
 }
 
@@ -72,15 +70,17 @@ export const post_asignacion_turno = async (empleado_id, tipo_turno, fecha) => {
         fecha : fecha
     }
 
-    const response = await axios.post(`${ASIGNACION_TURNO}`, body)
+    const response = await api.post(`${ASIGNACION_TURNO}`, body)
     return response.data
 }
 
 
 export const get_tipo_turnos = async () => {
-    const response = await axios.get(`${TIPO_TURNOS}`)
+    const response = await api.get(`${TIPO_TURNOS}`)
     return response.data
 }
+
+
 
 
 

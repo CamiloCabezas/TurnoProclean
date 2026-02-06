@@ -2,20 +2,36 @@ import { useState } from "react"
 import "./login.css"
 import Input from "../../components/input";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { login } from "../../endpoints/api";
 import Navbar from "../../components/navbar/navbar";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginSuccess } from "../../features/auth/authSlice";
+import { login } from "../../endpoints/api";
 
 const Login = () => {
+    const dispatch = useDispatch()   
+    const navigate = useNavigate()
 
     const [username , setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        login(username, password)
-        setUsername("")
-        setPassword("")
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const data = await login({
+            username,
+            password,
+            })
+
+
+            dispatch(loginSuccess(data))
+            navigate('/')
+        } catch (error) {
+            console.error("ERROR LOGIN:", error)
+            alert("Credenciales Incorrectas")
+        }
+        }
 
     return (
         <div>

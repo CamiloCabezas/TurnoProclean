@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import filtrosReducer from '../../src/features/filtros/filtrosSlice'
+import filtrosReducer from '../features/filtros/filtrosSlice'
+import authReducer from '../features/auth/authSlice'
 
 export const store = configureStore({
   reducer: {
-    filtros: filtrosReducer
-  }
+    auth: authReducer,
+    filtros: filtrosReducer,
+  },
 })
