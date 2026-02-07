@@ -92,4 +92,27 @@ Muchas empresas pequeñas y medianas:
 ---
 
 ## 📂 Estructura general del proyecto
+TurnoPro/
+│── backend/
+│ ├── apps/
+│ ├── models/
+│ ├── views/
+│ ├── serializers/
+│ └── urls/
+│
+│── frontend/
+│ ├── components/
+│ ├── pages/
+│ ├── features/
+│ │ ├── auth/
+│ │ └── filtros/
+│ ├── endpoints/
+│ └── app/
+
+---
+
+## 🔐 Protección de rutas (Frontend)
+
+Las rutas privadas solo son accesibles si el usuario está autenticado:
+
 
