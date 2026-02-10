@@ -1,27 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Routes, Route, useLocation } from 'react-router-dom'
-import Login from './routes/login/login'
-import Menu from './routes/menu/menu'
-import Navbar from './components/navbar/navbar'
-
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import Navbar from "./components/navbar/navbar";
+import Login from "./routes/login/login"
+import Menu from "./routes/menu/menu"
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
-    const location = useLocation();
+  const location = useLocation();
 
-    const hidenavbar = location.pathname === '/login'
+  const hideNavbar = location.pathname === "/login";
 
-    return (
-      
-      <>
-        {!hidenavbar && <Navbar/>}
-        <Routes>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/' element={<Menu/>}/>
-        </Routes>
-      </>
-    )
+  return (
+    <>
+      {!hideNavbar && <Navbar />}
+
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/menu"
+          element={
+            <PrivateRoute>
+              <Menu />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,74 @@
+.modal_overlay1{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal_content{
+  background: white;
+  border-radius: 12px;
+  width: 420px;
+  overflow: hidden;    
+}
+
+.header-error{
+    background-color: #ef4444;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;  
+}
+
+
+.close_btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.close_btn span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 3px;
+  background-color: black; 
+  border-radius: 2px;
+}
+
+.close_btn span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close_btn span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.body{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 20px;
+}
+
+.btn_aceptar{
+    border:0;
+    background-color: grey;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.btn_aceptar:hover{
+    border: solid 0.5px black;
+    background-color: #ef4444;
+}

@@ -26,6 +26,7 @@ const Menu = () => {
 
   // Esto estara mal pero es para pruebas -----------------
   useEffect(() => {
+    
     const start = new Date(startDate);
     const end = new Date(endDate);
     const listDates = [];

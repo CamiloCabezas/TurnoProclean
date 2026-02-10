@@ -15,6 +15,7 @@ const Login = () => {
     const [username , setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+   
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -26,7 +27,7 @@ const Login = () => {
 
 
             dispatch(loginSuccess(data))
-            navigate('/')
+            navigate('/menu')
         } catch (error) {
             console.error("ERROR LOGIN:", error)
             alert("Credenciales Incorrectas")
@@ -35,7 +36,6 @@ const Login = () => {
 
     return (
         <div>
-            <Navbar/>
             <div className="login-bg">
                 
                 <div className="login-card">
