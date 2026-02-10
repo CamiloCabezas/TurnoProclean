@@ -1,24 +1,39 @@
 .date-filter-container {
   text-align: center;
   background-color: #07434b;
-  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   width: fit-content;
   margin: 20px ;
 }
 
-.date-summary {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #444;
-}
 
-h4{
+
+.Title_filter{
   color: white;
+  background-color: aliceblue;
+  padding: 15px 20px;
+  border-radius: 12px 12px 0 0;
 }
 
 label{
   color: aliceblue;
   gap: 10px;
+}
+
+.info{
+  display:  flex;
+  flex-direction: row;
+  padding: 20px;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+.aplicar_filtros{
+  border: 0;
+  background-color: #2e8b57;
+  margin: 5px 0 15px 0;
+  width: 40%;
+  border-radius: 6px;
 }

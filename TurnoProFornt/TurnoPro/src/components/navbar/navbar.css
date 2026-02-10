@@ -2,23 +2,23 @@
 .Container-navbar{
     background-color: #07434b;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center; /* centra por defecto los hijos */
+    justify-content: space-between; 
     padding: 20px;
     position: relative; 
     border-radius: 0 0 5% 5%;
 }
 
-.Title{
+/* .Title{
     position: absolute;
     left: 20px;
-}
+} */
 
 .botones-navbar{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
     gap:30px; 
 }
 
@@ -34,4 +34,24 @@
 
 h1{
     color: #1a1717;
+}
+
+.logout{
+    width: 10%;
+}
+
+.btn_logout{
+    color: white;
+    background-color: #2e8b57;
+    border: 0;
+    width: 80%;
+    border-radius: 5px;
+    padding: 8px 10px;
+
+}
+
+.btn_logout:hover{
+    background-color: #07434b;
+    color: black;
+    border: solid white 0.5px;
 }

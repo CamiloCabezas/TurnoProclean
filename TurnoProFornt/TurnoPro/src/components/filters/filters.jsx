@@ -20,26 +20,34 @@ const DateFilter = () => {
 
   return (
     <div className="date-filter-container">
-      <h4>Selecciona el rango de fechas</h4>
+      <div className="Title_filter">
+        <h4 >Selecciona el rango de fechas</h4>
+      </div>
 
-      <label>Desde:</label>
-      <input
-        type="date"
-        value={localStartDate}
-        onChange={(e) => setLocalStartDate(e.target.value)}
-      />
+      <div className="info">
+        <div>
+          <label>Desde:</label>
+          <input
+            type="date"
+            value={localStartDate}
+            onChange={(e) => setLocalStartDate(e.target.value)}
+          />
+        </div>
 
-      <label>Hasta:</label>
-      <input
-        type="date"
-        value={localEndDate}
-        onChange={(e) => setLocalEndDate(e.target.value)}
-      />
-
-      <button onClick={aplicarFiltros}>
-        Aplicar filtros
-      </button>
-    </div>
+        <div>
+          <label>Hasta:</label>
+          <input
+            type="date"
+            value={localEndDate}
+            onChange={(e) => setLocalEndDate(e.target.value)}
+          />
+        </div>
+        </div>
+        <button onClick={aplicarFiltros} className="aplicar_filtros">
+          Aplicar filtros
+        </button>
+        
+      </div>
   );
 };
 
