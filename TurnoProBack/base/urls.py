@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_user_empresa, asignacion_turnos, get_turnos_asignados,maracaje_turno, get_tipoTurnos
+from .views import get_user_empresa, asignacion_turnos, get_turnos_asignados, maracaje_turno, get_tipoTurnos
 from django.urls import path
 from rest_framework_simplejwt.views import ( TokenObtainPairView,TokenRefreshView)
 
