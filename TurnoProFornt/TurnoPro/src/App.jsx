@@ -3,7 +3,7 @@ import Navbar from "./components/navbar/navbar";
 import Login from "./routes/login/login"
 import Menu from "./routes/menu/menu"
 import PrivateRoute from "./PrivateRoute";
-
+import Signin from "./components/signin/signin";
 function App() {
   const location = useLocation();
 
@@ -26,7 +26,16 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/signin"
+          element={
+            <PrivateRoute>
+              <Signin />
+            </PrivateRoute>
+          }
+        />
       </Routes>
+
     </>
   );
 }
