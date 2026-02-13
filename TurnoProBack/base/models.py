@@ -18,7 +18,7 @@ class Usuario(AbstractUser):
     )
 
     email = models.EmailField(unique=True)
-    rol = models.CharField(max_length=20, choices=ROLES, default='empleado')
+    rol = models.CharField(max_length=20, choices=ROLES, default='empresa')
     genero = models.CharField(max_length=2, choices=GENEROS, default='O')
     years = models.PositiveIntegerField(null=True, blank=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)

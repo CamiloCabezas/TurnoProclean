@@ -1,0 +1,170 @@
+.signin-bg {
+  background-color: #83d3d3; /* mismo fondo que login */
+  min-height: calc(100vh - 80px); /* Resta altura aproximada del navbar */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2rem; /* Espacio desde el navbar */
+  padding-bottom: 2rem;
+}
+
+.signin-card {
+  background-color: #07434b; /* mismo color de tarjeta que login */
+  border: none;
+  border-radius: 1rem;
+  width: 36rem;
+  max-width: 95vw;
+  padding: 30px 32px;
+  margin-top: 1rem; /* Espacio adicional desde arriba */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  color: #f9f9f9;
+}
+
+ .signin-title {
+   font-size: 1.8rem;
+   font-weight: 600;
+   margin-bottom: 0.5rem;
+   text-align: center;
+   color: #ffffff;
+ }
+
+ .signin-subtitle {
+   font-size: 0.95rem;
+   margin-bottom: 1.5rem;
+   text-align: center;
+   color: #d0e4e4;
+ }
+
+ .signin-section-title {
+   font-size: 1.1rem;
+   margin-top: 1rem;
+   margin-bottom: 0.75rem;
+   color: #ffffff;
+ }
+
+ .signin-form {
+   display: flex;
+   flex-direction: column;
+   gap: 0.75rem;
+ }
+
+ .signin-field-group {
+   display: flex;
+   flex-direction: column;
+   gap: 0.25rem;
+ }
+
+ .signin-label {
+   font-size: 0.9rem;
+   color: #dbe8e8;
+ }
+
+ .signin-input,
+ .signin-select,
+ .signin-textarea {
+   width: 100%;
+   padding: 0.55rem 0.7rem;
+   border-radius: 0.35rem;
+   border: 1px solid #1a5761;
+   background-color: #052b31;
+   color: #f9f9f9;
+   font-size: 0.9rem;
+ }
+
+ .signin-input::placeholder,
+ .signin-textarea::placeholder {
+   color: #8ba9ac;
+ }
+
+ .signin-input:focus,
+ .signin-select:focus,
+ .signin-textarea:focus {
+   outline: none;
+   border-color: #2e8b57;
+   box-shadow: 0 0 0 1px #2e8b57;
+ }
+
+ .signin-textarea {
+   min-height: 70px;
+   resize: vertical;
+ }
+
+ .signin-file-input {
+   margin-top: 0.25rem;
+   font-size: 0.85rem;
+   color: #dbe8e8;
+ }
+
+ .signin-submit {
+   margin-top: 1.5rem;
+   background-color: #2e8b57; /* mismo verde que btn-login */
+   color: #fff;
+   border: none;
+   transition: all 0.3s ease;
+   width: 100%;
+   border-radius: 0.35rem;
+   padding: 0.6rem 0.75rem;
+   font-size: 1rem;
+   font-weight: 500;
+   cursor: pointer;
+ }
+
+ .signin-submit:hover {
+   background-color: #1b5232;
+   border: solid 1px #ffffff22;
+ }
+
+/* --------- Responsive --------- */
+@media (max-width: 768px) {
+  .signin-bg {
+    padding: 1.5rem 0.75rem;
+    padding-top: 1.5rem;
+    justify-content: flex-start;
+    min-height: calc(100vh - 80px);
+  }
+
+  .signin-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 18px;
+    margin-top: 0.5rem;
+    border-radius: 0.75rem;
+  }
+
+  .signin-title {
+    font-size: 1.5rem;
+  }
+
+  .signin-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-card {
+    padding: 18px 14px;
+  }
+
+  .signin-title {
+    font-size: 1.3rem;
+  }
+
+  .signin-section-title {
+    font-size: 1rem;
+  }
+
+  .signin-input,
+  .signin-select,
+  .signin-textarea {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.65rem;
+  }
+
+  .signin-submit {
+    font-size: 0.95rem;
+    padding: 0.55rem 0.7rem;
+  }
+}
+
