@@ -27,7 +27,6 @@ const Signin = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log("Datos del formulario:", formData)
-        // Aquí luego podrás enviar formData al backend
     }
 
     return (

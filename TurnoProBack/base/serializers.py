@@ -102,3 +102,40 @@ class TurnoAsignadoSerializer(serializers.ModelSerializer):
             return round(horas, 2)
         return 0
 
+class EmpresaRegisterSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=True)
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(required=True)
+
+    class Meta:
+        model = Empresa
+        fields = (
+            "username",
+            "email",
+            "password",
+            "nombre",
+            "nit",
+            "descripcion",
+            "direccion",
+            "logo",
+        )
+
+        def create(self, validated_data):
+            user = Usuario.objects.create_user(
+                username=validated_data["username"],
+                email=validated_data["email"],
+                password=validated_data["password"],
+                rol="empresa",
+            )
+            empresa = Empresa.objects.create(
+                usuario=user,
+                nombre=validated_data["nombre"],
+                nit=validated_data["nit"],
+                descripcion=validated_data["descripcion"],
+                direccion=validated_data["direccion"],
+                logo=validated_data["logo"])
+
+            return empresa
+
+
+            
