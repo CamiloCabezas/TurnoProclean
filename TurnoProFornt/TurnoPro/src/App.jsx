@@ -3,7 +3,7 @@ import Navbar from "./components/navbar/navbar";
 import Login from "./routes/login/login"
 import Menu from "./routes/menu/menu"
 import PrivateRoute from "./PrivateRoute";
-import Signin from "./components/signin/signin";
+import Signin from "./routes/signin/signin";
 function App() {
   const location = useLocation();
 
@@ -29,9 +29,7 @@ function App() {
         <Route
           path="/signin"
           element={
-            
               <Signin />
-           
           }
         />
       </Routes>
