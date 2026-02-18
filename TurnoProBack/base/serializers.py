@@ -103,9 +103,9 @@ class TurnoAsignadoSerializer(serializers.ModelSerializer):
         return 0
 
 class EmpresaRegisterSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(required=True)
-    email = serializers.EmailField(required=True)
-    password = serializers.CharField(required=True)
+    username = serializers.CharField(write_only=True)
+    email = serializers.EmailField(write_only=True)
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = Empresa
@@ -120,22 +120,36 @@ class EmpresaRegisterSerializer(serializers.ModelSerializer):
             "logo",
         )
 
-        def create(self, validated_data):
-            user = Usuario.objects.create_user(
-                username=validated_data["username"],
-                email=validated_data["email"],
-                password=validated_data["password"],
-                rol="empresa",
-            )
-            empresa = Empresa.objects.create(
-                usuario=user,
-                nombre=validated_data["nombre"],
-                nit=validated_data["nit"],
-                descripcion=validated_data["descripcion"],
-                direccion=validated_data["direccion"],
-                logo=validated_data["logo"])
+    def validate_email(self, value):
+        if Usuario.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Este email ya está registrado.")
+        return value
 
-            return empresa
+    def validate_username(self, value):
+        if Usuario.objects.filter(username=value).exists():
+            raise serializers.ValidationError("Este username ya está registrado.")
+        return value
+
+    def create(self, validated_data):
+        username = validated_data.pop("username")
+        email = validated_data.pop("email")
+        password = validated_data.pop("password")
+
+        user = Usuario.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+            rol="empresa",
+        )
+
+        empresa = Empresa.objects.create(
+            usuario=user,
+            **validated_data
+        )
+
+        return empresa
+
+
 
 
             

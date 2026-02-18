@@ -1,9 +1,9 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Usuario, Empleado, Empresa, TipoTurno, TurnoAsignado
-from .serializers import EmpleadoSerializer, TurnoAsignadoSerializer, TipoTurnoSerializer
+from .serializers import EmpleadoSerializer, EmpresaSerializer, EmpresaRegisterSerializer, TurnoAsignadoSerializer, TipoTurnoSerializer
 from django.utils import timezone
 from datetime import datetime
 
@@ -56,15 +56,6 @@ def get_turnos_asignados(request, empresa):
 
     serializer = TurnoAsignadoSerializer(turnos, many=True)
     return Response(serializer.data, status=200)
-
-
-
-
-
-
-
-    
-
 
 
 
@@ -186,8 +177,33 @@ def get_tipoTurnos(request):
     return Response(serializer.data, status=200)
     
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register_empresa(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    email = request.data.get("email")
+    nombre = request.data.get("nombre")
+    nit = request.data.get("nit")
+    descripcion = request.data.get("descripcion")
+    direccion = request.data.get("direccion")
+    logo = request.data.get("logo")
 
+    if not username or not password or not email or not nombre or not nit or not descripcion or not direccion :
+        return Response({"error": "Faltan campos requeridos"}, status=400)
+    
+    serializer = EmpresaRegisterSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_empresas(request):
+    empresas = Empresa.objects.all()
+    serializer = EmpresaSerializer(empresas, many=True)
+    return Response(serializer.data, status=200)
 
 #Ver como se va a presentar en el front
 
