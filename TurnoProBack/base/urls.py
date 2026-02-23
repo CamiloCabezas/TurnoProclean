@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_user_empresa, asignacion_turnos, get_turnos_asignados, maracaje_turno, get_tipoTurnos, register_empresa, get_empresas
+from .views import get_user_empresa, asignacion_turnos, get_turnos_asignados, maracaje_turno, get_tipoTurnos, register_empresa, get_empresas, get_id_empresa
 from django.urls import path
 from rest_framework_simplejwt.views import ( TokenObtainPairView,TokenRefreshView)
 
@@ -12,5 +12,6 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path("register_empresa/", register_empresa),
-    path("empresas/", get_empresas)
+    path("empresas/", get_empresas),
+    path("id_empresa/<str:username>/", get_id_empresa)
 ]

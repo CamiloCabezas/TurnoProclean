@@ -205,8 +205,18 @@ def get_empresas(request):
     serializer = EmpresaSerializer(empresas, many=True)
     return Response(serializer.data, status=200)
 
-#Ver como se va a presentar en el front
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_id_empresa(request, username): 
+    try:
+        usuario = Usuario.objects.get(username=username)
+        empresa = Empresa.objects.get(usuario=usuario)
+        return Response({"id": empresa.id}, status=200)
+        
+    except Usuario.DoesNotExist:
+        return Response({"error": "Usuario no encontrado"}, status=404)
+    except Empresa.DoesNotExist:
+        return Response({"error": "El usuario no tiene una empresa asociada"}, status=404)
 
 
 

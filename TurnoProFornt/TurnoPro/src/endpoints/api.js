@@ -10,6 +10,7 @@ const TURNOS_EMPRESA = `${BASE_URL}TurnosAsignados/`
 const MARCAJES = `${BASE_URL}maracaje_turno/`
 const TIPO_TURNOS = `${BASE_URL}tipoTurnos/`
 const ASIGNACION_TURNO = `${BASE_URL}asignarTurnos/`
+const ID_EMPRESA = `${BASE_URL}id_empresa/`
 
 export const login = async (credentials) => {
     const response = await api.post(LOGIN_URL,credentials
@@ -18,13 +19,10 @@ export const login = async (credentials) => {
     return response.data
 }
 
-// export const refresh_token = async () => {
-//     const response = await axios.post(REFRESH_URL,
-//         {},
-//         {withCredentials : true}
-//     )
-//     return response.data
-// }
+export const get_id_empresa = async (username) => {
+    const response = await api.get(`${ID_EMPRESA}${encodeURIComponent(username)}/`)
+    return response.data
+}
 
 
 export const get_movimientos = async () => {

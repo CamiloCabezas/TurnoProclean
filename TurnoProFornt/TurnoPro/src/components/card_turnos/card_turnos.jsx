@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import './card_turnos.css'
 import MarcajeModal from '../marcajes_turno/marcajes_turno'
 import Asignacion_turno from '../asignacion_turno/asignacion_turno'
+import { get_id_empresa } from '../../endpoints/api'
 
 
 
@@ -30,7 +31,9 @@ const Card_turnos = (dates) => {
     
     useEffect(() => {
         const fetchEmpleados = async () => {
-          const data = await get_turnos_asignados(1, dates.dates);
+
+          const idEmpresa = await get_id_empresa(localStorage.getItem('username'))
+          const data = await get_turnos_asignados(idEmpresa.id, dates.dates);
           if (data) {
             console.log("data");
             setturnosAsignados(data);
@@ -44,9 +47,8 @@ const Card_turnos = (dates) => {
 
     
     const fetchEmpleados = async () => {
-          const data = await get_turnos_asignados(1, dates.dates);
+          const data = await get_turnos_asignados(idEmpresa.id, dates.dates);
           if (data) {
-            console.log("data");
             setturnosAsignados(data);
           } else {
             alert("No se pudieron cargar los empleados.");
