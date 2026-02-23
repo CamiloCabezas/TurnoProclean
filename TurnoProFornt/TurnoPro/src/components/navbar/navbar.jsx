@@ -21,7 +21,7 @@ const Navbar = () => {
                 <div className='botones-navbar'>
                 <a href="">Menu</a>
                 <a href="">Personal</a>
-                <a href="">Creacion</a>
+                <a href="/createEmploy">Creacion</a>
                 
             </div>
             <div className='logout'>

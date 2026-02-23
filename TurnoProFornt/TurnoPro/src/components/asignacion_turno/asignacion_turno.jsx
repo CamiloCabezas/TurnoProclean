@@ -11,7 +11,8 @@ const Asignacion_turno = ({ dia, cerrar, actualizarDatos }) => {
 
   useEffect(() =>{
     const tipoTurnos = async () => {
-      const dataEmpleados = await get_empleados_empresa("Chayas Peluqueria")
+      const idEmpresa = await get_id_empresa(localStorage.getItem('username'))
+      const dataEmpleados = await get_empleados_empresa(idEmpresa.id)
       const dataturnos = await get_tipo_turnos()
       if(dataturnos && dataEmpleados){
         setTipoTurnos(dataturnos)

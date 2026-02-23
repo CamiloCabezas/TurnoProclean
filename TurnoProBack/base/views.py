@@ -11,8 +11,7 @@ from datetime import datetime
 @permission_classes([IsAuthenticated])
 def get_user_empresa(request, empresa):
     try:
-        empresa_obj = Empresa.objects.get(nombre=empresa)
-        print(empresa)
+        empresa_obj = Empresa.objects.get(id=empresa)
     except Empresa.DoesNotExist:
         return Response({"error": "Empresa no encontrada"}, status=404)
     

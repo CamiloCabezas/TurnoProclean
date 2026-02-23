@@ -4,6 +4,7 @@ import Login from "./routes/login/login"
 import Menu from "./routes/menu/menu"
 import PrivateRoute from "./PrivateRoute";
 import Signin from "./routes/signin/signin";
+import Crear_empleado from "./routes/createEmploy/crear_empleado";
 function App() {
   const location = useLocation();
 
@@ -32,7 +33,16 @@ function App() {
               <Signin />
           }
         />
+        <Route
+        path="/createEmploy"
+        element={
+          <PrivateRoute>
+            <Crear_empleado />
+          </PrivateRoute>
+        }
+      />
       </Routes>
+      
 
     </>
   );

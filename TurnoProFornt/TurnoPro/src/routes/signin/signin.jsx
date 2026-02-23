@@ -1,7 +1,10 @@
 import { useState } from "react"
 import "./signin.css"
+import { signin  } from "../../endpoints/api"
+import { useNavigate } from "react-router-dom"
 
 const Signin = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -26,9 +29,13 @@ const Signin = () => {
         
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log("Datos del formulario:", formData)
+    const handleSubmit = async (e) => {
+        const creacion = await signin(formData)
+        navigate("/")
+        
+    }
+    const salir = () =>{
+        navigate("/")
     }
 
     return (
@@ -200,7 +207,9 @@ const Signin = () => {
                     <button type="submit" className="signin-submit">
                         Registrarse como empresa
                     </button>
+
                 </form>
+                <button className="signin-submit" onClick={salir}>Volver</button>
             </div>
         </div>
     )

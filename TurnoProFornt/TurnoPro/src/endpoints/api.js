@@ -11,6 +11,7 @@ const MARCAJES = `${BASE_URL}maracaje_turno/`
 const TIPO_TURNOS = `${BASE_URL}tipoTurnos/`
 const ASIGNACION_TURNO = `${BASE_URL}asignarTurnos/`
 const ID_EMPRESA = `${BASE_URL}id_empresa/`
+const SIGNING = `${BASE_URL}register_empresa/`
 
 export const login = async (credentials) => {
     const response = await api.post(LOGIN_URL,credentials
@@ -75,6 +76,11 @@ export const post_asignacion_turno = async (empleado_id, tipo_turno, fecha) => {
 
 export const get_tipo_turnos = async () => {
     const response = await api.get(`${TIPO_TURNOS}`)
+    return response.data
+}
+
+export const signin = async (data) =>{
+    const response = await api.post(`${SIGNING}`, data)
     return response.data
 }
 
