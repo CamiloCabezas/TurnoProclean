@@ -24,9 +24,13 @@ const Login = () => {
             username,
             password,
             })
+            
+
+        
 
 
             dispatch(loginSuccess(data))
+            localStorage.setItem('username', username)
             navigate('/menu')
         } catch (error) {
             console.error("ERROR LOGIN:", error)
